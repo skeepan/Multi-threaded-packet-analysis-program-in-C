@@ -19,10 +19,10 @@ struct arguments {
 };
 
 void print_usage(char *progname) {
-  fprintf(stderr, "A Packet Sniffer/Intrusion Detection System tutorial\n");
+  fprintf(stderr, "A Packet Sniffer/Intrusion Detection System\n");
   fprintf(stderr, "Usage: %s [OPTIONS]...\n\n", progname);
   fprintf(stderr, "\t-i [interface]\tSpecify network interface to sniff\n");
-  fprintf(stderr, "\t-v\t\tEnable verbose mode. Useful for Debugging\n");
+  fprintf(stderr, "\t-v\t\tEnable verbose mode.\n");
 }
 
 int main(int argc, char *argv[]) {
