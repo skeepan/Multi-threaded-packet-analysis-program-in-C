@@ -1,7 +1,7 @@
-#ifndef CS241_ANALYSIS_H
-#define CS241_ANALYSIS_H
+#ifndef PACKET_PARSER_H
+#define PACKET_PARSER_H
 
-#include "analysis.h"
+#include "packet_parser.h"
 #include "queue.h"
 #include "hashmap.h"
 
@@ -25,6 +25,6 @@ void printParseFlags(StatParse* parse);
 StatParse* init_Parse(void);
 void reset_Parse(StatParse* parse);
 
-void analyse(const unsigned char *packet, StatParse *parse);
+void parse_packet(const unsigned char *packet, StatParse *parse);
 
 #endif

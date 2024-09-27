@@ -1,4 +1,4 @@
-#include "analysis.h"
+#include "packet_parser.h"
 
 #include <net/ethernet.h>     // Ether header for Intellisense
 #include <netinet/if_ether.h> // Ether/ARP header
@@ -26,7 +26,7 @@ void reset_Parse(StatParse* parse) {                                //This funct
   parse->source_ip = 0;
 }
 
-void analyse(const unsigned char *packet, StatParse *parse) { 
+void parse_packet(const unsigned char *packet, StatParse *parse) { 
 
   reset_Parse(parse);
   struct ether_header *eth_header = (struct ether_header *) packet;   //Makes the ether header readable by typecasting the data to ether_header struct

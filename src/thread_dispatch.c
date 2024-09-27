@@ -1,14 +1,14 @@
-#include "dispatch.h"
+#include "thread_dispatch.h"
 
 #include <pthread.h>
 #include <signal.h>
 #include <pcap.h>
 
-#include "analysis.h"
+#include "packet_parser.h"
 #include "queue.h"
 #include "hashmap.h"
 
-#include "sniff.h"
+#include "capture.h"
 #define NUMTHREADS 5                              //Number of worker threads (feel free to change based on computer)
 
 pthread_t tid[NUMTHREADS];                        //Array to store thread IDs
@@ -88,7 +88,7 @@ void *thread_func (void *arg) {
 		dequeue(packet_Queue);                                      // Dequeueing frees the queue element
 		pthread_mutex_unlock(&queue_mutex);
 
-    analyse(packet, parse);
+    parse_packet(packet, parse);
     
     pthread_mutex_lock(&global_mutex);                          // Updating the global variables and hashing any relevant source IPs
     SYN_count += parse->SYN;
@@ -105,7 +105,7 @@ void *thread_func (void *arg) {
 }
 
 //This function enqueues packet header information into the packet_queue in a threadsafe manner.
-void dispatch(uint32_t len, const unsigned char *packet) { 
+void thread_dispatch(uint32_t len, const unsigned char *packet) { 
   pthread_mutex_lock(&queue_mutex);
 	enqueue(packet_Queue, len, packet);
 	pthread_cond_broadcast(&queue_cond);

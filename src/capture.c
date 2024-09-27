@@ -1,4 +1,4 @@
-#include "sniff.h"
+#include "capture.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,7 +21,7 @@ void terminate_pcap() {
 }
 
 // Application main sniffing loop
-void sniff(char *interface, int verbose) {
+void capture(char *interface, int verbose) {
   signal(SIGINT, signalHandler);
   char errbuf[PCAP_ERRBUF_SIZE];
 
@@ -33,7 +33,7 @@ void sniff(char *interface, int verbose) {
     fprintf(stderr, "Unable to open interface %s\n", errbuf);
     exit(EXIT_FAILURE);
   } else {
-    printf("SUCCESS! Opened %s for capture\n", interface);
+    printf("PCAP_open success on interface %s.\n", interface);
   }
   
   init_threadq();
